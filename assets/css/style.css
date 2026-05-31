@@ -31,6 +31,7 @@ body {
 
 header {
     padding: 6rem 0 4rem 0;
+    text-align: center;
 }
 
 header h1 {
@@ -60,6 +61,7 @@ header p {
     color: var(--accent-color);
     max-width: 600px;
     line-height: 1.8;
+    margin: 0 auto;
 }
 
 section {
@@ -97,11 +99,15 @@ section {
 /* 3D Coverflow Container Layer Layout */
 .coverflow-wrap {
     width: 100%;
-    overflow: hidden;
-    padding: 5rem 0;
+    overflow: visible;
+    padding: 5rem 2rem;
     background-color: transparent; /* Removed dark background for carousel */
-    perspective: 1000px; /* Crucial field for rendering depth effects */
+    perspective: 1200px; /* Crucial field for rendering depth effects */
     margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: -100px;
 }
 
 .coverflow-stage {
@@ -157,12 +163,14 @@ section {
     display: block;
     overflow: hidden;
     box-sizing: border-box;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
-    transition: all 0.3s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
 }
 
 .work-card:hover .inner-carousel {
-    box-shadow: 0 28px 70px rgba(0,0,0,0.1);
+    box-shadow: 0 35px 85px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
 }
 
 .inner-carousel img {
@@ -195,7 +203,7 @@ section {
 
 .inner-carousel img.slide-active {
     opacity: 1;
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 .inner-carousel img.slide-active::before {
@@ -250,11 +258,19 @@ section {
     margin: 48px auto;
     text-align: center;
     padding: 0 1.5rem;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.work-card:nth-child(3) {
+    z-index: 10;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
 }
 
 .work-card:hover {
-    transform: translateY(-2px);
+    z-index: 15;
 }
 
 .work-heading {
@@ -344,18 +360,28 @@ section {
     margin-bottom: 1rem;
 }
 
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
 .contact-links a {
     color: var(--text-color);
     text-decoration: none;
-    margin-right: 2rem;
     font-size: 1rem;
-    border-bottom: 2px solid rgba(0,0,0,0);
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
     transition: all 0.25s ease;
+    display: inline-block;
+    background-color: transparent;
 }
 
 .contact-links a:hover {
-    color: var(--accent-color);
-    border-bottom-color: var(--accent-color);
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 footer {
@@ -393,3 +419,210 @@ footer {
 }
 
 .uploader-input { display: none; }
+
+/* ====== Media Queries ====== */
+
+/* 0-480px: Smaller smartphones */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    header {
+        padding: 4rem 0 2rem 0;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    header h1::after {
+        width: 40px;
+        height: 3px;
+    }
+
+    header p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    section {
+        padding: 2.5rem 0;
+    }
+
+    .coverflow-wrap {
+        padding: 3rem 1rem;
+    }
+
+    .work-card {
+        margin: 32px auto;
+        padding: 0 0.5rem;
+    }
+
+    .work-heading {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+    }
+
+    .work-sub {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .inner-carousel {
+        height: 280px;
+        border-radius: 16px;
+        margin: 16px auto 18px;
+    }
+
+    .inner-prev, .inner-next {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .contact-links {
+        gap: 1rem;
+    }
+
+    .contact-links a {
+        font-size: 0.9rem;
+    }
+
+    footer {
+        padding: 3rem 0;
+        font-size: 0.7rem;
+    }
+}
+
+/* 481-768px: Tablets & larger smartphones */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    header {
+        padding: 5rem 0 3rem 0;
+    }
+
+    header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
+    .coverflow-wrap {
+        padding: 4rem 1.5rem;
+    }
+
+    .work-card {
+        margin: 40px auto;
+        padding: 0 1rem;
+    }
+
+    .work-heading {
+        font-size: 1.3rem;
+    }
+
+    .inner-carousel {
+        height: 350px;
+        margin: 18px auto 20px;
+    }
+
+    .contact-links {
+        gap: 1.5rem;
+    }
+
+    footer {
+        padding: 3.5rem 0;
+    }
+}
+
+/* 769-1279px: Laptops, larger tablets in landscape, and small desktops */
+@media (min-width: 769px) and (max-width: 1279px) {
+    .container {
+        max-width: 700px;
+        padding: 0 2rem;
+    }
+
+    header {
+        padding: 5.5rem 0 3.5rem 0;
+    }
+
+    header h1 {
+        font-size: 2.4rem;
+    }
+
+    header p {
+        font-size: 1.02rem;
+    }
+
+    .coverflow-wrap {
+        padding: 4.5rem 2rem;
+    }
+
+    .work-card {
+        margin: 42px auto;
+    }
+
+    .work-heading {
+        font-size: 1.4rem;
+    }
+
+    .inner-carousel {
+        height: 390px;
+    }
+
+    .contact-links {
+        gap: 1.8rem;
+    }
+}
+
+/* 1280+px: Larger desktops and monitors */
+@media (min-width: 1280px) {
+    .container {
+        max-width: 900px;
+        padding: 0 2rem;
+    }
+
+    header {
+        padding: 6rem 0 4rem 0;
+    }
+
+    header h1 {
+        font-size: 2.8rem;
+    }
+
+    header p {
+        font-size: 1.05rem;
+    }
+
+    .coverflow-wrap {
+        padding: 5rem 2rem;
+    }
+
+    .work-card {
+        max-width: 960px;
+        margin: 48px auto;
+    }
+
+    .work-heading {
+        font-size: 1.5rem;
+    }
+
+    .inner-carousel {
+        height: 420px;
+    }
+
+    .contact-links {
+        gap: 2rem;
+    }
+}
